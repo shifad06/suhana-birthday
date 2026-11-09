@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090707">
+<title>A Special Birthday Surprise for Suhana ❤️</title>
+<style>
+:root{--gold:#e4bd73;--gold2:#ffe9b8;--cream:#fff3df;--dark:#080707;--red:#a72f48;--pink:#f4a1b8;--choc:#54251c;--straw:#e95070}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{min-height:100vh;background:radial-gradient(ellipse at 50% 0%,#392215 0%,#110b08 48%,#050505 100%);color:var(--cream);font-family:Georgia,"Times New Roman",serif;overflow-x:hidden}
+button,input{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.screen{display:none;min-height:100svh;width:100%;padding:28px 17px;align-items:center;justify-content:center;flex-direction:column;text-align:center;position:relative;overflow:hidden;isolation:isolate}
+.screen.active {
+  display: flex;
+  animation: screenIn .35s ease both;
+}
+
+#cutScreen.screen.active {
+  animation: none;
+}
+@keyframes screenIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+h1{color:var(--gold);font-size:clamp(2rem,9vw,3.3rem);line-height:1.18;text-shadow:0 0 24px #d6ae6255}
+h2{color:var(--gold);font-size:clamp(1.5rem,6vw,2.25rem);line-height:1.25}
+h3{color:var(--gold2);font-size:1.17rem;line-height:1.3}
+p{line-height:1.7}
+.subtitle{max-width:560px;color:#ead8b8;margin-top:14px;line-height:1.7}
+.note{color:#c3ad83;font-size:.9rem;line-height:1.6;margin-top:13px}
+.gold-button{border:1px solid #f4d18c;border-radius:40px;padding:14px 26px;margin:10px 5px;color:#211509;background:linear-gradient(135deg,#ffe9b6,#c49447);font-weight:bold;letter-spacing:.4px;box-shadow:0 0 20px #d6ae6235;transition:transform .2s,filter .2s}
+.gold-button:active{transform:scale(.96)}.gold-button:disabled{opacity:.38;cursor:not-allowed}
+.dark-button{background:#17100d;color:var(--gold2);border:1px solid #987447;border-radius:40px;padding:12px 21px;margin:7px 4px}
+.card{width:min(100%,540px);padding:27px 20px;border:1px solid #765b35;border-radius:23px;background:linear-gradient(145deg,#21170e,#0b0908);box-shadow:0 12px 45px #0009}
+.divider{width:100px;height:1px;background:var(--gold);margin:19px auto;box-shadow:0 0 12px var(--gold)}
+#floatingLayer,#confettiLayer{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:1000}
+.heart{position:absolute;bottom:-35px;color:#dd637c;opacity:0;text-shadow:0 0 12px #ff5577;animation:floatHeart linear forwards}
+@keyframes floatHeart{0%{transform:translateY(0) rotate(0);opacity:0}15%{opacity:.85}100%{transform:translateY(-110vh) rotate(45deg);opacity:0}}
+.lock-icon{font-size:3.4rem;margin-bottom:18px;animation:lockPulse 2s infinite}@keyframes lockPulse{50%{transform:scale(1.1)}}
+.password-input{width:min(100%,330px);border:1px solid var(--gold);border-radius:12px;padding:15px;margin:24px 0 10px;text-align:center;background:#17110c;color:white;outline:none}
+.password-input:focus{box-shadow:0 0 15px #d6ae6266}#errorMessage{color:#ff8797;min-height:22px;margin:8px 0}
+.big-birthday{font-size:clamp(2.5rem,11vw,4.5rem);font-weight:bold;line-height:1.1;animation:birthdayZoom 1.2s ease both}@keyframes birthdayZoom{0%{transform:scale(.2);opacity:0}70%{transform:scale(1.08);opacity:1}100%{transform:scale(1);opacity:1}}
+.balloon-rise{position:fixed;bottom:-120px;width:45px;height:60px;border-radius:50% 50% 45% 45%;animation:balloonRise 5.5s ease-out forwards;z-index:3;pointer-events:none;box-shadow:inset -8px -8px 12px #0002,inset 7px 6px 10px #fff5}
+.balloon-rise:after{content:"";position:absolute;left:50%;top:58px;height:38px;width:1px;background:#d7b98b}@keyframes balloonRise{0%{transform:translateY(0) rotate(-8deg) scale(.7);opacity:0}15%{opacity:1}100%{transform:translateY(-125vh) rotate(12deg);opacity:0}}
+.confetti{position:absolute;top:-20px;width:8px;height:14px;animation:confettiFall linear forwards}@keyframes confettiFall{to{transform:translateY(110vh) rotate(900deg);opacity:.2}}
+.message-box{max-width:560px;font-size:clamp(1.15rem,5vw,1.6rem);color:#fff0d3;line-height:1.9;margin:25px auto;animation:messageReveal .8s ease both}@keyframes messageReveal{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.photo-card{width:min(100%,420px);padding:12px;border:1px solid #ad8953;border-radius:21px;background:#17100d;margin-top:21px;box-shadow:0 10px 35px #000b}
+.photo-frame{position:relative;width:100%;aspect-ratio:4/5;border-radius:13px;overflow:hidden;background:linear-gradient(135deg,#3e291c,#100c09);display:flex;justify-content:center;align-items:center}
+.photo-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:imageZoom 3.2s ease both}.photo-frame img.image-error{display:none}.photo-placeholder{color:var(--gold);padding:22px;line-height:1.6}
+@keyframes imageZoom{from{opacity:0;transform:scale(1.1)}to{opacity:1;transform:scale(1.01)}}
+.photo-caption{color:var(--gold2);margin:14px 0 7px}.photo-counter{color:#bba77f;font-size:.85rem}.photo-controls{display:flex;justify-content:center;flex-wrap:wrap;margin-top:4px}
+.choice-grid{width:min(100%,520px);display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:28px}.choice-button{min-height:105px;padding:10px 4px;border:1px solid #9b7542;border-radius:17px;background:linear-gradient(145deg,#2b1a11,#100b09);color:var(--gold2);font-size:1rem}.choice-button:active{transform:scale(.96);background:#4b2821}.choice-emoji{display:block;font-size:1.8rem;margin-bottom:7px}
+.cake-symbol{font-size:5rem;margin:20px;animation:cakeBounce 2s infinite}@keyframes cakeBounce{50%{transform:translateY(-9px) rotate(3deg)}}
+
+/* CAKE STAGE: entire cake is built as a rotating 3D group. */
+#cakeDisplayScreen,#candleScreen,#cutScreen{justify-content:flex-start;overflow:visible;padding-top:28px;padding-bottom:34px}
+.cake-stage{position:relative;width:min(96vw,420px);height:390px;margin:12px auto 3px;perspective:1150px;perspective-origin:50% 45%;overflow:visible;touch-action:pan-y;isolation:isolate}
+.cake-stage:after{content:"";position:absolute;z-index:0;left:12%;bottom:17px;width:76%;height:28px;border-radius:50%;background:#000;filter:blur(16px)}
+.cake-rotating {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 67px;
+  width: 280px;
+  height: 290px;
+  margin-left: -140px;
+  transform-style: preserve-3d;
+  transform-origin: 50% 50%;
+  animation: cakeSpin 28s linear infinite;
+  will-change: transform;
+}
+
+.cake-rotating.static {
+  animation: none;
+  transform: rotateX(-8deg) rotateY(-12deg);
+}
+
+@keyframes cakeSpin {
+  from { transform: rotateX(-8deg) rotateY(0deg); }
+  to { transform: rotateX(-8deg) rotateY(360deg); }
+}
+.cake-tier{position:absolute;left:50%;transform-style:preserve-3d}
+.cake-face{position:absolute;left:50%;top:0;backface-visibility:hidden;transform-style:preserve-3d;overflow:visible}
+.cake-side{position:absolute;inset:0;border-radius:1px;background:linear-gradient(90deg,#b86b49 0%,#e4a77c 11%,#f8d5b2 25%,#df9e73 42%,#f7d8b6 58%,#cb805d 77%,#f0bd96 91%,#a85b41 100%);box-shadow:inset 0 9px 11px #fff5,inset 0 -10px 14px #71301e33}
+.cake-side:after{content:"";position:absolute;left:0;right:0;bottom:9px;height:8px;background:linear-gradient(90deg,#ec8094,#fff0dc 25%,#d64d70 55%,#fff0dc 78%,#e77c92);opacity:.92;box-shadow:0 2px 3px #65251f44}
+.chocolate-glaze{position:absolute;z-index:2;left:-1px;top:0;width:calc(100% + 2px);height:18px;background:linear-gradient(180deg,#34130f,#7a3322 55%,#4b1c16);clip-path:polygon(0 0,100% 0,100% 58%,82% 58%,78% 100%,68% 100%,65% 55%,48% 65%,43% 100%,33% 100%,29% 52%,10% 65%,7% 100%,0 90%);filter:drop-shadow(0 2px 2px #42170f66)}
+.cream-drip{position:absolute;z-index:3;left:-1px;top:5px;width:calc(100% + 2px);height:34px;background:linear-gradient(180deg,#fff9ee,#f9dfc7 80%,#eebc9f);clip-path:polygon(0 0,100% 0,100% 55%,87% 55%,84% 100%,74% 100%,70% 57%,51% 62%,47% 91%,37% 91%,32% 54%,15% 63%,11% 100%,4% 92%,0 60%);filter:drop-shadow(0 2px 2px #6f382355)}
+.tier-top{position:absolute;border-radius:50%;transform:rotateX(90deg);transform-origin:center center;border:4px solid #fff0d9;background:radial-gradient(ellipse at 34% 30%,#fffdf4 0%,#ffe8d0 47%,#e9b68f 100%);box-shadow:inset 0 0 18px #a85c3c33,0 2px 4px #4d211d66;backface-visibility:hidden}
+.tier-bottom{position:absolute;border-radius:50%;transform:rotateX(90deg);border:3px solid #e7b48a;background:radial-gradient(ellipse at 35% 30%,#fbe1c2,#d9976f 70%,#9f523a);backface-visibility:hidden}
+.tier-filling{position:absolute;left:0;bottom:7px;width:100%;height:8px;background:linear-gradient(90deg,#d93e68,#ffb7c8,#fff2de,#e84970);box-shadow:0 2px 5px #7c203c66}
+.cake-inscription-char{position:absolute;z-index:12;left:50%;top:31px;width:14px;height:17px;margin-left:-7px;display:flex;align-items:center;justify-content:center;color:#6a2a22;font-size:9px;font-weight:bold;line-height:1;text-shadow:0 1px #fff4;backface-visibility:hidden;white-space:pre}
+.cake-berry{position:absolute;z-index:10;left:50%;top:0;font-size:17px;line-height:1;filter:drop-shadow(0 2px 2px #6a271d88);transform-style:preserve-3d}
+.candle-field{position:absolute;z-index:25;left:50%;top:-25px;width:142px;height:66px;margin-left:-71px;display:flex;align-items:flex-end;justify-content:center;gap:22px;transform:translateZ(10px);transform-style:preserve-3d}
+.candle{position:relative;width:13px;height:38px;border-radius:4px 4px 2px 2px;background:repeating-linear-gradient(135deg,#fff8e9 0 6px,#e95774 6px 12px);box-shadow:inset -2px 0 3px #8b304b55,0 1px 3px #65332666}
+.candle:nth-child(2){height:43px}.candle:nth-child(3){height:38px}
+.flame{position:absolute;left:50%;top:-22px;margin-left:-7px;width:14px;height:22px;border-radius:50% 50% 45% 45%;background:radial-gradient(ellipse,#fffbd0 5%,#ffd15c 45%,#ff7629 82%);box-shadow:0 0 12px #ffbd35,0 0 25px #ff7b22;transform-origin:bottom;animation:flameFlicker .16s infinite alternate}
+@keyframes flameFlicker{from{transform:rotate(-5deg) scale(1)}to{transform:rotate(5deg) scale(.9,1.13)}}
+.flame.off{animation:none;opacity:0;transform:scale(.2)}
+.smoke{position:absolute;top:-24px;left:50%;width:7px;height:7px;margin-left:-3px;border-radius:50%;background:#c9c9c9;opacity:0;filter:blur(1px)}.smoke.rising{animation:smokeUp 1.8s ease-out forwards}@keyframes smokeUp{0%{opacity:.7;transform:translateY(0) scale(.5)}100%{opacity:0;transform:translateY(-37px) scale(2.7)}}
+.balloon-cluster{position:absolute;z-index:4;left:50%;top:-62px;width:220px;height:112px;margin-left:-110px;transform-style:preserve-3d;transform:translateZ(-32px);pointer-events:none}
+.cake-balloon{position:absolute;width:43px;height:57px;border-radius:52% 52% 48% 48%;box-shadow:inset -8px -8px 12px #0002,inset 7px 7px 11px #fff7,0 4px 8px #0002}
+.cake-balloon:before{content:"";position:absolute;bottom:-4px;left:50%;margin-left:-4px;border-left:4px solid transparent;border-right:4px solid transparent;border-top:7px solid currentColor}
+.cake-balloon:after{content:"";position:absolute;left:50%;top:55px;width:1px;height:57px;background:#e8d0ad;transform:rotate(3deg);transform-origin:top}
+.cake-balloon.blue{left:28px;top:17px;background:radial-gradient(circle at 30% 25%,#e4ffff,#77d3ec 56%,#268eae);color:#55b6ce}
+.cake-balloon.pink{left:87px;top:0;background:radial-gradient(circle at 30% 25%,#fff0f5,#f48fb4 58%,#c84375);color:#e778a0}
+.cake-balloon.gold{left:145px;top:19px;background:radial-gradient(circle at 30% 25%,#fff8d8,#f1cf71 58%,#bd8d36);color:#d5ad55}
+.rub-zone{position:absolute;z-index:50;top:12px;left:50%;transform:translateX(-50%);width:235px;height:104px;border-radius:48%;background:transparent;touch-action:none;cursor:grab}
+.rub-instruction{position:relative;z-index:52;color:var(--gold2);background:#100b09d9;padding:10px 16px;border:1px dashed #bf9958;border-radius:30px;margin-top:-3px;font-size:.95rem;pointer-events:none}
+.rub-status{color:#e7c98e;font-size:.92rem;min-height:25px;margin:9px}
+
+/* Cutting scene: vector hand, knife and a layered slice. */
+.cut-scene .cake-rotating{animation:none;transform:rotateX(-8deg) rotateY(-12deg)}
+.cut-hand {
+  position: absolute;
+  z-index: 90;
+  top: 5px;
+  left: 39%;
+  width: min(48vw, 190px);
+  height: 155px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(65px, -110px) rotate(-8deg);
+  transform-origin: 75% 75%;
+}
+.cutting .cut-hand{animation:handCut 3.2s cubic-bezier(.42,0,.28,1) forwards}
+@keyframes handCut{0%{opacity:0;transform:translate(95px,-145px) rotate(-8deg)}18%{opacity:1;transform:translate(60px,-70px) rotate(-2deg)}46%{opacity:1;transform:translate(-5px,48px) rotate(17deg)}68%{opacity:1;transform:translate(-12px,58px) rotate(20deg)}100%{opacity:0;transform:translate(-35px,8px) rotate(4deg)}}
+.cake-cut-mark {
+  position: absolute;
+  z-index: 38;
+  left: 50%;
+  top: 145px;
+  width: 28px;
+  height: 75px;
+  margin-left: -14px;
+  background: linear-gradient(90deg, #54251c, #8b4934, #54251c);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  opacity: 0;
+  transform: translateZ(128px) scale(.5);
+  filter: blur(1px);
+}
+.cutting .cake-cut-mark{animation:gapReveal .6s 1.65s ease forwards}@keyframes gapReveal{to{opacity:.78;transform:translateZ(130px) scale(1)}}
+.slice-piece{position:absolute;z-index:110;right:5%;bottom:7px;width:min(47vw,190px);height:auto;opacity:0;filter:drop-shadow(0 12px 12px #0009);transform:translate(-10px,30px) scale(.55) rotate(-9deg);transform-origin:50% 80%;pointer-events:none}
+.cutting .slice-piece{animation:sliceReveal 1.2s 2.35s cubic-bezier(.2,.8,.2,1) forwards}@keyframes sliceReveal{0%{opacity:0;transform:translate(-40px,30px) scale(.55) rotate(-9deg)}65%{opacity:1;transform:translate(5px,-3px) scale(1.04) rotate(4deg)}100%{opacity:1;transform:translate(0,0) scale(1) rotate(0)}}
+.cut-status{min-height:28px;color:var(--gold2);margin:8px}
+
+/* final photo */
+.final-photo-frame{width:min(88vw,390px);aspect-ratio:4/5;overflow:hidden;border-radius:22px;border:2px solid var(--gold);box-shadow:0 0 35px #d6ae6266;background:linear-gradient(135deg,#372718,#090706);position:relative;margin:20px auto}
+.final-photo-frame img{width:100%;height:100%;object-fit:cover;animation:finalZoom 13s ease-in-out infinite alternate}@keyframes finalZoom{from{transform:scale(1)}to{transform:scale(1.13)}}
+@media(max-width:390px){.cake-stage{height:365px;transform:scale(.94);transform-origin:top center;margin-bottom:-15px}.choice-button{font-size:.86rem}.cut-hand{left:31%;width:66vw}.slice-piece{right:0}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
+/* FIX CAKE CUTTING WHITE FLASH */
+
+#cutCakeStage {
+  background: transparent;
+  isolation: isolate;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+#cutCakeStage .cake-rotating {
+  animation: none !important;
+  transform: rotateX(-8deg) rotateY(-12deg);
+  will-change: auto;
+}
+
+#cutCakeStage .cut-hand,
+#cutCakeStage .slice-piece {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+#cutScreen {
+  background: transparent;
+}
+               
+               </style>
+</head>
+<body>
+<div id="floatingLayer" aria-hidden="true"></div><div id="confettiLayer" aria-hidden="true"></div>
+
+<!-- 01 PASSWORD -->
+<section class="screen active" id="passwordScreen">
+  <div class="card"><div class="lock-icon">🎁</div><h1>A LITTLE GIFT FOR YOU 🎁</h1><div class="divider"></div>
+    <p class="subtitle">Wanna unlock your surprise? Enter the password shared by your pasandida mard 😘</p>
+    <input class="password-input" id="passwordInput" type="password" placeholder="Enter password" autocomplete="off" aria-label="Birthday password">
+    <div id="errorMessage" aria-live="polite"></div><button class="gold-button" id="unlockButton">UNLOCK MY GIFT 🔓</button>
+    <p class="note">A little surprise is waiting for you ❤️</p>
+  </div>
+</section>
+
+<!-- 02 BIRTHDAY REVEAL -->
+<section class="screen" id="birthdayScreen">
+  <div class="big-birthday">HAPPY<br>BIRTHDAY</div><h1 style="margin-top:12px">SUHANA 🤍✨💘 </h1>
+  <div class="divider"></div><p class="subtitle">Today is all about you! A little birthday surprise made with love. 🎉</p>
+  <button class="gold-button" onclick="goToSweetIntro()">LET'S BEGIN ❤️</button>
+<p class="note">“Hey, it's your favourite person, Shifad! 😉❤️"Let the show begin! 🥳✨ I hope you enjoy every little surprise on this mini website! 🥹💗😘</p></section>
+
+<!-- 03 SWEET INTRO -->
+<section class="screen" id="sweetIntroScreen"><div class="card"><div style="font-size:3rem">💌</div><h1 style="font-size:2.2rem">Let's start your birthday</h1><h2 style="margin-top:10px">with sweet messages ❤️</h2><div class="divider"></div><button class="gold-button" onclick="startMessages()">NEXT →</button></div></section>
+
+<!-- 04 MESSAGES -->
+<section class="screen" id="messagesScreen"><div class="card"><h2 id="messageHeading">A LITTLE MESSAGE FOR YOU ❤️</h2><div class="message-box" id="messageText"></div><p class="note" id="messageCounter"></p><button class="gold-button" onclick="nextMessage()">NEXT →</button></div></section>
+
+<!-- 05 SOLO PHOTO INTRO -->
+<section class="screen" id="soloIntroScreen"><div class="card"><div style="font-size:3rem">😂</div><h1 style="font-size:2.2rem">Sorry for calling you Bounii! 😂😭 Don't get mad, okay? 🙈💕 Now let's move on to make your birthday even more memorable! 🥳❤️✨</h1><div class="divider"></div><button class="gold-button" onclick="startSoloGallery()">NEXT →</button></div></section>
+
+<!-- 06 SOLO GALLERY -->
+<section class="screen" id="soloGalleryScreen"><h2>The Birthday Girl 📸</h2><div class="photo-card"><div class="photo-frame"><div class="photo-placeholder" id="soloPlaceholder">Add Suhana's photos inside the photos folder.</div><img id="soloImage" alt="Suhana's photo" style="display:none"></div><div class="photo-caption" id="soloCaption">Our favourite girl 😻❤️</div><div class="photo-counter" id="soloCounter">PHOTO 1 / 6</div></div><div class="photo-controls"><button class="dark-button" onclick="movePhoto('solo',-1)">← PREVIOUS</button><button class="dark-button" onclick="movePhoto('solo',1)">NEXT →</button></div><p class="note">Automatic slideshow · Every 3 seconds</p><button class="gold-button" onclick="goToCoupleQuestion()">Done admiring all these pictures, sweetheart? 🥹💕 Tap here to discover the next little surprise waiting just for you! 😘💋✨
+</button></section>
+
+<!-- 07 COUPLE QUESTION -->
+<section class="screen" id="coupleQuestionScreen"><div class="card"><div style="font-size:3rem">😉</div><h2>Would you like to see something more special? 😉</h2><div class="divider"></div><button class="gold-button" onclick="startCoupleGallery()">YES ❤️</button><button class="dark-button" onclick="goToCakeIntro()">NO 🙈</button></div></section>
+
+<!-- 08 COUPLE GALLERY -->
+<section class="screen" id="coupleGalleryScreen"><h2>Our Beautiful Memories ❤️</h2><div class="photo-card"><div class="photo-frame"><div class="photo-placeholder" id="couplePlaceholder">Add your couple photos inside the photos folder.</div><img id="coupleImage" alt="Couple memory" style="display:none"></div><div class="photo-caption" id="coupleCaption"> 😊✨</div><div class="photo-counter" id="coupleCounter">PHOTO 1 / 6</div></div><div class="photo-controls"><button class="dark-button" onclick="movePhoto('couple',-1)">← PREVIOUS</button><button class="dark-button" onclick="movePhoto('couple',1)">NEXT →</button></div><p class="note">Automatic slideshow · Every 3 seconds</p><button class="gold-button" onclick="goToCakeIntro()">. “Finished looking at our cute moments?🥰😊❤️ Tap here, there's another little surprise for you! 💋💗✨
+</button></section>
+
+<!-- 09 CAKE INTRO -->
+<section class="screen" id="cakeIntroScreen"><div class="card"><div class="cake-symbol">🎂</div><h1>NOW IT'S CAKE TIME!</h1><h2 style="margin-top:15px">Make a wish, Suhana!</h2><div class="divider"></div><button class="gold-button" onclick="showCake()">SHOW MY CAKE 🎂</button><p class="note">Your special cake celebration starts now.</p></div></section>
+
+<!-- 10 CAKE DISPLAY -->
+<section class="screen" id="cakeDisplayScreen"><h2>YOUR SPECIAL CAKE 🎂</h2><p class="note">Three tiers · Strawberry · Cream · Chocolate</p><div class="cake-stage" id="cakeDisplayStage" aria-label="A rotating three-tier birthday cake"></div><p class="note">HAPPY BIRTHDAY, SUHANA! 🎂❤️🥳😘, I HOPE U LIKED MY LIL SWEET CAKE🥳<</p><button class="gold-button" onclick="openCandleScreen()">NEXT🕯️</button></section>
+
+<!-- 11 CANDLES -->
+<section class="screen" id="candleScreen"><h2>MAKE A WISH! 🕯️</h2><p class="subtitle">Rub directly over the three candles with your finger.</p><div class="cake-stage" id="candleStage" aria-label="Cake with three lit candles"></div><div class="rub-instruction">“Now, gently blow on the candles to put out the flames! 🕯️💨 Make a wish before you do, birthday girl! 🎂😘💕”
+
+Come on, bachi! 😂 Take a deep breath and blow those candles out! 💨🎂✨”
+</div><div class="rub-status" id="rubStatus" aria-live="polite">candle instruction:-To blow out the candles, simply rub your finger over the candle on the screen! ☝️🕯️💨</div><button class="gold-button" id="candleNextButton" disabled onclick="openCutScreen()">NEXT →</button><p class="note">It's time to cut the cake, Suhana! 🎂🔪❤️</p></section>
+
+<!-- 12 CAKE CUTTING -->
+<section class="screen" id="cutScreen"><h2>TIME TO CUT YOUR CAKE! 🍰</h2><p class="subtitle">A special slice of birthday happiness ❤️</p><div class="cake-stage cut-scene" id="cutCakeStage" aria-label="A girl cuts the birthday cake"></div><h3 class="cut-status" id="cutStatus">Your cake is ready! 🎂</h3><button class="gold-button" id="cutCakeButton" onclick="cutCake()">CUT THE CAKE 🔪</button><button class="gold-button" id="cutNextButton" style="display:none" onclick="openBiteScreen()">GIVE FIRST BITE ❤️</button><p class="note">I hope you enjoyed the cake cutting🥺..</p></section>
+
+<!-- 13 FIRST BITE -->
+<section class="screen" id="biteScreen"><div class="card"><h2>Whom would u love to give first bite? 😉</h2><div class="divider"></div><div class="choice-grid"><button class="choice-button" onclick="selectBite('mama')"><span class="choice-emoji">❤️</span>MAMA</button><button class="choice-button" onclick="selectBite('shifad')"><span class="choice-emoji">😘</span>SHIFAD</button><button class="choice-button" onclick="selectBite('suhana')"><span class="choice-emoji">😤</span>SUHANA</button></div></div></section>
+
+<!-- 14 FUNNY MESSAGE -->
+<section class="screen" id="funnyScreen"><div class="card"><div style="font-size:3rem" id="funnyEmoji">😭</div><h2 id="funnyTitle">YOUR CHOICE!</h2><div class="message-box" id="funnyMessage"></div><div class="divider"></div><button class="gold-button" onclick="showSelectedPhoto()">“Tap here to see the pic of the lucky person you chose for the first bite! 🙈💕🍰😘”
+</button></div></section>
+
+<!-- 15 SELECTED PHOTO -->
+<section class="screen" id="selectedPhotoScreen"><h2 id="selectedPhotoHeading">A SPECIAL PHOTO ❤️</h2><div class="photo-card"><div class="photo-frame"><div class="photo-placeholder" id="selectedPhotoPlaceholder">Selected person's photo</div><img id="selectedPhotoImage" alt="Selected person's photo" style="display:none"></div><p class="photo-caption" id="selectedPhotoCaption">A special memory ❤️</p></div><button class="gold-button" onclick="showFinalMessage()">NEXT →</button></section>
+
+<!-- 16 FINAL MESSAGE -->
+<section class="screen" id="finalMessageScreen"><div class="card"><div style="font-size:2.8rem">💖</div><h1 style="font-size:2.3rem">The End of Your Little Surprise! 🥹💕</h1><div class="divider"></div><div class="message-box">And that's the end of your little birthday surprise! <br><br>🥹🎀 I hope it brought a smile to your face. Keep smiling, stay happy, and never stop being the adorable little bachi you are! 😂💕 Love you, Suhana! 😘❤️✨<br><br>✨⭐✨ </div><button class="gold-button" onclick="showThankYouScreen()">FINISH ❤️</button></div></section>
+
+<!-- 17 FINAL PICTURE -->
+<section class="screen" id="finalPhotoScreen"><h1 style="font-size:2.2rem">BAUNII 😂😂</h1><div class="final-photo-frame"><div class="photo-placeholder" id="finalPlaceholder">Add your chosen final photo as photos/final.jpg</div><img id="finalImage" alt="Final birthday photo" style="display:none"></div><h2>Happy Birthday,chiknii Suhana! 😘</h2><p class="note">With love, from your pasandida mard ❤️</p><button class="gold-button" onclick="showThankYouScreen()">FINISH ❤️</button></section>
+
+<!-- 18 THANK YOU -->
+<section class="screen" id="thankYouScreen"><h1>THANK YOU FOR VISITING! ❤️</h1><p class="subtitle">I hope you enjoyed your gift, Suhana! 🥹💗</p><h2 style="margin-top:18px">Made with love, just for you. 😘</h2><p class="note">Until next time! ✨</p><h3 style="margin-top:18px">— Your pasandida mard ❤️</h3><button class="gold-button" onclick="restartCelebration()">🎉 RE-CELEBRATE</button><button class="gold-button" onclick="exitWebsite()">🚪 EXIT WEBSITE</button><p class="note" id="exitMessage"></p></section>
+
+<script>
+/* PERSONAL SETTINGS */
+const PASSWORD = "suhana0615";
+const soloPhotos = ["photos/suhana1.jpg","photos/suhana2.jpg","photos/suhana3.jpg","photos/suhana4.jpg","photos/suhana5.jpg","photos/suhana6.jpg"];
+const couplePhotos = ["photos/couple1.jpg","photos/couple2.jpg","photos/couple3.jpg","photos/couple4.jpg","photos/couple5.jpg","photos/couple6.jpg"];
+const soloCaptions = ["The birthday star ❤️","Our favourite girl 😻","✨","✨🥹✨","❤️","✨✨🫰✨✨"];
+const coupleCaptions = ["Together ❤️","😊✨"," 😉 ","My favourite memories","Always special 😘","Us, always ❤️"];
+
+  const sweetMessages = ["I love you, Suhana! 😘❤️✨. I hope I can make your birthday a little more special and memorable with this small gift from me. 🎀🥹 I created this little birthday website just for you, with lots of love and affection. 💝 I hope it brings a beautiful smile to your face and makes you feel as special as you truly are. 🦋💗 May your life always be filled with happiness, endless love, beautiful memories, and success. I wish you nothing but the very best in your future. Keep smiling, keep shining, and keep chasing all your dreams. 🌷✨Once again, happiest birthday, my dear Suhana! 🎂😘lots of love, always! 💋💕",
+  "I'm sorry for all the arguments and fights we've had. 🥺❤️ But enough with the sorrys… madam jii is officially 19 now! 😂🎂 Your age keeps increasing, but your height and body size are still stuck in school-kid mode! 🤏😭 At least try to grow a little taller this year,bachi suhana! 😂😂🙈💕"
+];
+  
+const bitePeople = {
+  mama:{message:"Ybooo ude um mom ye maa nik bva 😭😩",heading:"MOM GETS THE FIRST BITE ❤️",emoji:"🥹",photo:"photos/mom.jpg",caption:"A special photo of Mom ❤️"},
+  shifad:{message:"Yebo 😭 finally. You choosed Shifad not mom 😩😭",heading:"SHIFAD GETS THE FIRST BITE 😭",emoji:"😘",photo:"photos/shifad.jpg",caption:"The lucky one is Shifad 😭❤️"},
+  suhana:{message:"Kanjuss..selfish kahii ki😭 ",heading:"YOU CHOSE YOURSELF?! 😭",emoji:"😤",photo:"photos/suhana.jpg",caption:"The birthday girl herself 😻"}
+};
+let currentAudio=null, heartTimer=null, messageIndex=0, galleryIndex={solo:0,couple:0}, galleryTimers={solo:null,couple:null}, selectedBite=null, rubDistance=0, rubLast=null, candlesDone=false;
+
+/* NAVIGATION + AUDIO */
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  const target=document.getElementById(id);
+  if(!target){console.error('Screen not found:',id);return;}
+  target.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(id!=='soloGalleryScreen')stopGalleryTimer('solo');
+  if(id!=='coupleGalleryScreen')stopGalleryTimer('couple');
+}
+function playTrack(file,loop=true,volume=.5){
+  try{if(currentAudio){currentAudio.pause();currentAudio.currentTime=0;}currentAudio=new Audio(file);currentAudio.loop=loop;currentAudio.volume=volume;const p=currentAudio.play();if(p&&p.catch)p.catch(()=>console.info('Audio may need a tap or the file may be missing:',file));}catch(e){console.warn('Audio could not start:',e);}
+}
+function stopMusic(){if(currentAudio){currentAudio.pause();currentAudio.currentTime=0;currentAudio=null;}}
+function stopGalleryTimer(kind){if(galleryTimers[kind]){clearInterval(galleryTimers[kind]);galleryTimers[kind]=null;}}
+
+/* CELEBRATION EFFECTS */
+function startHearts(){if(heartTimer)return;heartTimer=setInterval(()=>{const layer=document.getElementById('floatingLayer');const heart=document.createElement('span');heart.className='heart';heart.textContent=Math.random()>.5?'♥':'♡';heart.style.left=Math.random()*100+'%';heart.style.fontSize=(15+Math.random()*25)+'px';heart.style.animationDuration=(5+Math.random()*5)+'s';layer.appendChild(heart);setTimeout(()=>heart.remove(),10500);},750);}
+function createConfetti(amount=100){const layer=document.getElementById('confettiLayer');layer.innerHTML='';const colors=['#e6bd72','#f4dfb5','#a9344d','#fff','#e6a8a8'];for(let i=0;i<amount;i++){const p=document.createElement('i');p.className='confetti';p.style.left=Math.random()*100+'%';p.style.background=colors[i%colors.length];p.style.animationDuration=(3+Math.random()*4)+'s';p.style.animationDelay=Math.random()*1.5+'s';layer.appendChild(p);}setTimeout(()=>layer.innerHTML='',8500);}
+function createBalloonBurst(amount=17){const colors=['#a92540','#c79a50','#e9c5a0','#e77fa3','#70c9df'];for(let i=0;i<amount;i++){const b=document.createElement('div');b.className='balloon-rise';b.style.left=Math.random()*100+'%';b.style.background=colors[i%colors.length];b.style.animationDelay=Math.random()*1.5+'s';document.body.appendChild(b);setTimeout(()=>b.remove(),7500);}}
+function unlockGift(){const val=document.getElementById('passwordInput').value;const error=document.getElementById('errorMessage');if(val===PASSWORD){error.textContent='';showScreen('birthdayScreen');playTrack('music/blast.mp3',false,.9);createConfetti(150);createBalloonBurst(20);startHearts();}else{error.textContent='Wrong password! Try again ❤️';document.getElementById('passwordInput').value='';}}
+document.getElementById('unlockButton').addEventListener('click',unlockGift);document.getElementById('passwordInput').addEventListener('keydown',e=>{if(e.key==='Enter')unlockGift();});
+
+/* SWEET MESSAGES */
+function goToSweetIntro(){
+  showScreen('sweetIntroScreen');
+  playTrack('music/romantic.mp3', true, .42);
+  startHearts();
+}
+function startMessages(){
+  messageIndex=0;
+  showScreen('messagesScreen');
+  renderMessage();
+}
+  
+function renderMessage(){const box=document.getElementById('messageText');box.style.animation='none';void box.offsetWidth;box.textContent=sweetMessages[messageIndex];box.style.animation='messageReveal .8s ease both';document.getElementById('messageCounter').textContent=`MESSAGE ${messageIndex+1} / ${sweetMessages.length}`;}
+function nextMessage(){messageIndex++;if(messageIndex>=sweetMessages.length){showScreen('soloIntroScreen');return;}renderMessage();}
+
+/* PHOTO GALLERIES */
+function setPhoto(kind,index){const isSolo=kind==='solo',photos=isSolo?soloPhotos:couplePhotos,captions=isSolo?soloCaptions:coupleCaptions;galleryIndex[kind]=(index+photos.length)%photos.length;const image=document.getElementById(isSolo?'soloImage':'coupleImage'),placeholder=document.getElementById(isSolo?'soloPlaceholder':'couplePlaceholder');placeholder.style.display='none';image.style.display='block';image.classList.remove('image-error');image.style.animation='none';void image.offsetWidth;image.style.animation='imageZoom 3.2s ease both';image.onload=()=>{image.style.display='block';placeholder.style.display='none';};image.onerror=()=>{image.style.display='none';placeholder.style.display='grid';placeholder.textContent='Photo not found: '+photos[galleryIndex[kind]];};image.src=photos[galleryIndex[kind]];document.getElementById(isSolo?'soloCaption':'coupleCaption').textContent=captions[galleryIndex[kind]];document.getElementById(isSolo?'soloCounter':'coupleCounter').textContent=`PHOTO ${galleryIndex[kind]+1} / ${photos.length}`;}
+function startGalleryTimer(kind){stopGalleryTimer(kind);galleryTimers[kind]=setInterval(()=>setPhoto(kind,galleryIndex[kind]+1),3000);}
+function movePhoto(kind,dir){setPhoto(kind,galleryIndex[kind]+dir);startGalleryTimer(kind);}
+function startSoloGallery(){showScreen('soloGalleryScreen');setPhoto('solo',0);startGalleryTimer('solo');}
+function goToCoupleQuestion(){showScreen('coupleQuestionScreen');}
+function startCoupleGallery(){
+  showScreen('coupleGalleryScreen');
+  setPhoto('couple',0);
+  startGalleryTimer('couple');
+}
+function goToCakeIntro(){showScreen('cakeIntroScreen');}
+
+/* 3D CAKE BUILDER: 3 tiers, 3 candles, text ring on middle tier only. */
+const CAKE_SEGMENTS=16;
+function makeTier(label,radius,height,top,opts={}){
+  const width=2*radius*Math.tan(Math.PI/CAKE_SEGMENTS)+1.3;
+  let html=`<div class="cake-tier ${label}" style="top:${top}px;width:${radius*2}px;height:${height}px;margin-left:-${radius}px">`;
+  html+=`<div class="tier-top" style="left:0;top:-${radius}px;width:${radius*2}px;height:${radius*2}px"></div>`;
+  html+=`<div class="tier-bottom" style="left:0;top:${height-radius}px;width:${radius*2}px;height:${radius*2}px"></div>`;
+  for(let i=0;i<CAKE_SEGMENTS;i++){
+    const angle=i*360/CAKE_SEGMENTS;
+    html+=`<div class="cake-face" style="width:${width}px;height:${height}px;margin-left:-${width/2}px;transform:rotateY(${angle}deg) translateZ(${radius}px)"><div class="cake-side"></div><div class="chocolate-glaze"></div><div class="cream-drip" style="clip-path:polygon(0 0,100% 0,100% ${53+(i%3)*6}%,${82-(i%3)*5}% ${55+(i%3)*5}%,${78-(i%3)*4}% 100%,${68-(i%3)*3}% 100%,${64-(i%3)*4}% 58%,${48+(i%4)*3}% 66%,${43+(i%4)*2}% ${88+(i%3)*3}%,${33+(i%3)*4}% ${88+(i%3)*3}%,${29+(i%3)*4}% 54%,${12+(i%3)*5}% 64%,${8+(i%3)*4}% 100%,0 88%)"></div><div class="tier-filling"></div></div>`;
+  }
+  if(opts.inscription){
+    const phrase='HAPPY BIRTHDAY CHIKNII SUHANA ♥';
+    const chars=64;
+    for(let i=0;i<chars;i++){
+      const ch=phrase[i%phrase.length]===' '?'\u00a0':phrase[i%phrase.length];
+      html+=`<span class="cake-inscription-char" style="transform:rotateY(${i*360/chars}deg) translateZ(${radius+2}px)">${ch}</span>`;
+    }
+  }
+  html+='</div>';
+  return html;
+}
+function addTopBerries(root,radius,top){
+  const holder=document.createElement('div');holder.className='berry-ring';holder.style.cssText=`position:absolute;inset:0;transform-style:preserve-3d;pointer-events:none;z-index:28`;
+  for(let i=0;i<8;i++){
+    const a=i*Math.PI/4, x=Math.cos(a)*radius*.68, z=Math.sin(a)*radius*.68;
+    const berry=document.createElement('span');berry.className='cake-berry';berry.textContent='🍓';berry.style.transform=`translate(-50%,-50%) translate3d(${x}px,${top+1}px,${z}px)`;holder.appendChild(berry);
+  }
+  root.appendChild(holder);
+}
+function addCakeBalloons(root){
+  const cluster=document.createElement('div');cluster.className='balloon-cluster';
+  ['blue','pink','gold'].forEach(color=>{const b=document.createElement('div');b.className='cake-balloon '+color;cluster.appendChild(b);});
+  root.appendChild(cluster);
+}
+function addCandles(root, extinguished = false) {
+  const field = document.createElement('div');
+  field.className = 'candle-field';
+
+  for (let i = 0; i < 3; i++) {
+    const candle = document.createElement('div');
+    candle.className = 'candle';
+
+    candle.innerHTML =
+      '<span class="flame' + (extinguished ? ' off' : '') + '"></span>' +
+      '<span class="smoke' + (extinguished ? ' rising' : '') + '"></span>';
+
+    field.appendChild(candle);
+  }
+
+  root.appendChild(field);
+}
+   
+function buildCake(stageId,{staticMode=false,balloons=true,cutting=false}={}){
+  const stage=document.getElementById(stageId);stage.innerHTML='';
+  const root=document.createElement('div');root.className='cake-rotating'+(staticMode?' static':'');
+  root.innerHTML=makeTier('tier-base',126,82,174)+makeTier('tier-middle',101,76,101,{inscription:true})+makeTier('tier-topper',73,64,43);
+  stage.appendChild(root);
+  addTopBerries(root,73,43);
+  if(balloons)addCakeBalloons(root);
+  addCandles(root, cutting);
+  if(stageId==='candleStage'){
+    const zone=document.createElement('div');zone.className='rub-zone';zone.setAttribute('aria-label','Rub here to put out the candles');stage.appendChild(zone);wireCandleRub(zone);
+  }
+  if(cutting){
+    const gap=document.createElement('div');gap.className='cake-cut-mark';root.appendChild(gap);
+    const hand=document.createElement('div');hand.className='cut-hand';hand.innerHTML=`<svg viewBox="0 0 260 190" width="100%" height="100%" aria-hidden="true">
+      <defs><linearGradient id="skin" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe0c4"/><stop offset=".55" stop-color="#e9ad86"/><stop offset="1" stop-color="#bd7657"/></linearGradient><linearGradient id="blade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".45" stop-color="#dce4e8"/><stop offset="1" stop-color="#84939b"/></linearGradient><linearGradient id="sleeve" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff1f5"/><stop offset="1" stop-color="#d87d9b"/></linearGradient></defs>
+      <!-- knife handle and pointed blade -->
+      <path d="M42 134 Q35 126 44 117 L76 87 Q84 80 92 89 L105 102 Q111 110 102 118 L69 148 Q57 159 42 134Z" fill="#3a1718" stroke="#1c0b0c" stroke-width="3"/><path d="M53 132 L82 104" stroke="#d6a15c" stroke-width="3" stroke-linecap="round"/><path d="M85 100 L221 4 Q232 -2 227 11 L113 128 Q104 137 96 126Z" fill="url(#blade)" stroke="#66747b" stroke-width="2.5"/><path d="M94 115 L213 17" stroke="#fff" stroke-width="3" opacity=".9"/>
+      <!-- pink sleeve and forearm -->
+      <path d="M0 190 Q9 163 36 140 L66 113 Q80 103 93 116 L111 137 Q117 148 103 159 L70 184Z" fill="url(#sleeve)" stroke="#9f536e" stroke-width="3"/><path d="M16 180 Q36 155 62 139" stroke="#fff" stroke-width="5" opacity=".7"/>
+      <!-- hand wrapped around handle -->
+      <path d="M49 139 Q39 127 51 116 Q62 105 73 111 L89 123 Q99 130 91 141 L80 153 Q68 163 57 153Z" fill="url(#skin)" stroke="#a96a50" stroke-width="2.5"/><path d="M57 119 Q47 108 56 101 Q65 94 75 105 L91 118 Q98 125 91 132 Q84 138 76 131Z" fill="url(#skin)" stroke="#a96a50" stroke-width="2.2"/><path d="M64 108 Q58 97 67 91 Q76 86 85 98 L99 111 Q105 119 97 125 Q90 130 82 122Z" fill="url(#skin)" stroke="#a96a50" stroke-width="2.2"/><path d="M80 113 Q76 103 85 98 Q94 94 102 105 L111 116 Q116 125 107 131 Q98 135 91 126Z" fill="url(#skin)" stroke="#a96a50" stroke-width="2.2"/><path d="M54 126 Q62 121 69 129" fill="none" stroke="#fff0e4" stroke-width="2" opacity=".75"/><path d="M70 103 Q75 98 80 105" fill="none" stroke="#fff0e4" stroke-width="2" opacity=".7"/>
+      </svg>`;
+    stage.appendChild(hand);
+    const slice=document.createElement('div');slice.className='slice-piece';slice.innerHTML=`<svg viewBox="0 0 230 160" width="100%" role="img" aria-label="A thick strawberry and cream cake slice">
+      <defs><linearGradient id="spongeA" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ffe2ad"/><stop offset="1" stop-color="#c9854d"/></linearGradient><linearGradient id="creamA" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fffefa"/><stop offset="1" stop-color="#f0c7b4"/></linearGradient><linearGradient id="berryA" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff8ba6"/><stop offset="1" stop-color="#c92c55"/></linearGradient></defs>
+      <ellipse cx="120" cy="145" rx="94" ry="10" fill="#000" opacity=".22"/>
+      <!-- deep side of triangular slice -->
+      <path d="M18 55 Q82 72 132 89 L132 143 Q77 126 18 108Z" fill="url(#spongeA)" stroke="#9f603e" stroke-width="2"/>
+      <path d="M132 89 L213 34 L213 91 L132 143Z" fill="#cb8854" stroke="#8f5037" stroke-width="2"/>
+      <!-- visible strawberry and cream fillings -->
+      <path d="M20 72 Q76 88 132 105 L132 114 Q76 96 20 81Z" fill="#fff4df"/>
+      <path d="M20 82 Q78 100 132 116 L132 124 Q77 107 20 91Z" fill="url(#berryA)"/>
+      <path d="M20 94 Q78 112 132 127 L132 135 Q76 119 20 103Z" fill="#fff0dc"/>
+      <path d="M132 105 L213 50 L213 60 L132 116Z" fill="#fff0dc"/><path d="M132 116 L213 60 L213 70 L132 127Z" fill="url(#berryA)"/><path d="M132 127 L213 70 L213 80 L132 138Z" fill="#fff0dc"/>
+      <!-- frosting top -->
+      <path d="M17 53 Q89 -2 215 31 L132 89 Q68 72 17 53Z" fill="url(#creamA)" stroke="#fff" stroke-width="2"/>
+      <path d="M18 54 Q82 74 132 89 L132 98 Q74 81 18 64Z" fill="#fff8ed"/>
+      <path d="M46 47 Q62 31 82 27" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+      <!-- cream drips on the front edge -->
+      <path d="M18 57 Q27 61 31 62 Q35 64 34 77 Q33 83 28 79 Q23 76 24 68 L17 65Z" fill="#fff8ef"/><path d="M84 77 Q95 79 98 84 Q101 91 96 96 Q90 96 89 89 L86 82Z" fill="#fff8ef"/>
+      <!-- strawberry garnish -->
+      <path d="M91 34 C76 23 80 7 94 6 C105 5 112 17 106 27 C102 34 97 37 91 34Z" fill="#e83c60" stroke="#a51f42" stroke-width="2"/><path d="M93 8 Q98 0 104 5" fill="none" stroke="#4c9d53" stroke-width="5" stroke-linecap="round"/><g fill="#ffe6a8"><circle cx="91" cy="18" r="1.5"/><circle cx="101" cy="17" r="1.5"/><circle cx="96" cy="27" r="1.5"/></g>
+      <path d="M45 65 Q73 76 105 83" stroke="#fff" stroke-width="2" opacity=".55" fill="none"/>
+    </svg>`;
+    stage.appendChild(slice);
+  }
+  return root;
+}
+function showCake(){showScreen('cakeDisplayScreen');buildCake('cakeDisplayStage',{balloons:true});playTrack('music/cake.mp3',true,.52);}
+
+/* CANDLE TOUCH/RUB: rub movement directly across the candle area. */
+function wireCandleRub(zone){
+  rubDistance=0;rubLast=null;candlesDone=false;
+  const status=document.getElementById('rubStatus'),next=document.getElementById('candleNextButton');next.disabled=true;
+  const addMove=e=>{if(candlesDone)return;const p={x:e.clientX,y:e.clientY};if(rubLast){rubDistance+=Math.hypot(p.x-rubLast.x,p.y-rubLast.y);}rubLast=p;if(rubDistance>105)extinguishCandles();};
+  zone.onpointerdown=e=>{e.preventDefault();rubLast={x:e.clientX,y:e.clientY};rubDistance+=3;try{zone.setPointerCapture(e.pointerId);}catch(_){}};
+  zone.onpointermove=e=>{if(e.buttons||e.pressure>0){e.preventDefault();addMove(e);}};
+  zone.onpointerup=()=>{rubLast=null;};zone.onpointercancel=()=>{rubLast=null;};
+  zone.ontouchmove=e=>e.preventDefault();
+}
+function extinguishCandles(){if(candlesDone)return;candlesDone=true;document.querySelectorAll('#candleStage .flame').forEach(f=>f.classList.add('off'));document.querySelectorAll('#candleStage .smoke').forEach((s,i)=>{s.style.animationDelay=(i*.12)+'s';s.classList.add('rising');});document.getElementById('rubStatus').textContent=' All three candles are out.';document.getElementById('candleNextButton').disabled=false;}
+function openCandleScreen(){showScreen('candleScreen');buildCake('candleStage',{staticMode:true,balloons:true});}
+
+/* CUTTING FLOW */
+function openCutScreen(){showScreen('cutScreen');buildCake('cutCakeStage',{staticMode:true,balloons:false,cutting:true});document.getElementById('cutCakeStage').classList.remove('cutting');document.getElementById('cutStatus').textContent='Your cake is ready! 🎂';document.getElementById('cutCakeButton').disabled=false;document.getElementById('cutCakeButton').style.display='inline-block';document.getElementById('cutNextButton').style.display='none';}
+function cutCake(){const stage=document.getElementById('cutCakeStage');const button=document.getElementById('cutCakeButton');if(stage.classList.contains('cutting'))return;stage.classList.add('cutting');button.disabled=true;document.getElementById('cutStatus').textContent='Suhana is cutting the cake... 🍰';setTimeout(()=>{document.getElementById('cutStatus').textContent='A fresh strawberry-and-cream slice😋😋.. ';document.getElementById('cutNextButton').style.display='inline-block';},3700);}
+
+/* FIRST BITE + PHOTO */
+function openBiteScreen(){showScreen('biteScreen');}
+function selectBite(person){selectedBite=person;const item=bitePeople[person];document.getElementById('funnyEmoji').textContent=item.emoji;document.getElementById('funnyTitle').textContent=item.heading;document.getElementById('funnyMessage').textContent=item.message;showScreen('funnyScreen');}
+function showSelectedPhoto(){const item=bitePeople[selectedBite];showScreen('selectedPhotoScreen');document.getElementById('selectedPhotoHeading').textContent=item.heading;document.getElementById('selectedPhotoCaption').textContent=item.caption;loadImage('selectedPhotoImage','selectedPhotoPlaceholder',item.photo);}
+function loadImage(imageId,placeholderId,src){const image=document.getElementById(imageId),placeholder=document.getElementById(placeholderId);placeholder.style.display='none';image.style.display='block';image.onload=()=>{image.style.display='block';placeholder.style.display='none';};image.onerror=()=>{image.style.display='none';placeholder.style.display='grid';placeholder.textContent='Photo missing: '+src;};image.src=src;}
+function showFinalMessage(){showScreen('finalMessageScreen');playTrack('music/romantic.mp3',true,.45);}
+function showThankYouScreen(){showScreen('thankYouScreen');}
+function restartCelebration(){stopMusic();stopGalleryTimer('solo');stopGalleryTimer('couple');document.getElementById('passwordInput').value='';document.getElementById('errorMessage').textContent='';document.getElementById('exitMessage').textContent='';document.getElementById('candleNextButton').disabled=true;showScreen('passwordScreen');document.getElementById('passwordInput').focus();}
+function exitWebsite(){stopMusic();const msg=document.getElementById('exitMessage');try{window.close();}catch(_){}msg.textContent='Chrome may block automatic closing. Please close this tab to exit. ❤️';}
+
+/* STARTUP */
+document.getElementById('passwordInput').focus();
+window.addEventListener('resize',()=>{document.body.style.minHeight=window.innerHeight+'px';});
+</script>
+</body>
+</html>
